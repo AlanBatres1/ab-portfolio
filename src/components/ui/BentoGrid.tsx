@@ -1,7 +1,6 @@
 import { cn } from "../../../lib/utils/cn";
 import { BackgroundGradientAnimation } from "./background-gradient-animation";
 
-
 export const BentoGrid = ({
   className,
   children,
@@ -12,7 +11,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "mx-auto grid max-w-7xl grid-cols-1 gap-4 md:auto-rows-[18rem] md:grid-cols-3",
+        "mx-auto grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-6 md:auto-rows-[18rem]",
         className,
       )}
     >
@@ -31,12 +30,10 @@ export const BentoGridItem = ({
   imgClassName,
   titleClassName,
   spareImg,
-
 }: {
   className?: string;
   title?: string | React.ReactNode;
   description?: string | React.ReactNode;
-  header?: React.ReactNode;
   icon?: React.ReactNode;
   id?: number;
   img?: string;
@@ -47,70 +44,79 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        "group/bento shadow-input row-span-1 relative flex flex-col justify-between space-y-4 rounded-3xl border border-neutral-200 bg-white p-4 transition duration-200 hover:shadow-xl dark:border-white/[0.2] dark:bg-black dark:shadow-none",
+        "group relative flex flex-col justify-between overflow-hidden rounded-xl transform-gpu",
+        "bg-transparent border border-[rgba(255,255,255,0.1)]",
+        "[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]",
+        "hover:[box-shadow:0_-40px_120px_-20px_#ffffff2f_inset]",
+        "transition duration-300",
+        "bg-black",
+        // Ensure content stays on top with relative z-10
+        "relative z-10",
+        id !== 6 && "p-4",
         className,
       )}
       style={{
-        background: "rgb(4,7,29)",
-        backgroundColor:
-          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
+        background: "",
       }}
     >
-      <div className={`${id === 6 && "flex justify-center"} h-full`}>
-        <div className="w-full h-full absolute">
-          {img && (
+      {/* Background Animation for ID 6 */}
+      {id === 6 && (
+        <div className="absolute inset-0 z-0">
+          <BackgroundGradientAnimation />
+        </div>
+      )}
+
+      {/* Card content */}
+      <div
+        className={`${id === 6 ? "flex justify-center z-10" : ""} h-full w-full relative`}
+      >
+        {/* Background Image */}
+        {img && (
+          <div className="w-full h-full absolute z-0">
             <img
               src={img}
               alt={img}
-              className={cn(imgClassName, "object-cover object-center ")}
+              className={cn(imgClassName, "object-cover object-center")}
             />
-          )}
-        </div>
-        <div
-          className={`absolute right-0 -bottom-5 ${id === 5 && "w-full opacity-80"
-            } `}
-        >
-          {spareImg && (
+          </div>
+        )}
+
+        {/* Spare Image */}
+        {spareImg && (
+          <div className={`absolute right-0 -bottom-5 ${id === 5 ? "w-full opacity-80" : ""}`}>
             <img
               src={spareImg}
               alt={spareImg}
-              //   width={220}
               className="object-cover object-center w-full h-full"
             />
-          )}
-        </div>
-        {id === 6 && (
-          // add background animation , remove the p tag
-          <BackgroundGradientAnimation>
-            <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
-          </BackgroundGradientAnimation>
+          </div>
         )}
 
+        {/* Title & Description */}
         <div
           className={cn(
             titleClassName,
-            "group-hover/bento:translate-x-2 transition duration-200 relative md:h-full min-h-40 flex flex-col px-5 p-5 lg:p-10"
+            "group-hover/bento:translate-x-2 transition duration-200 relative md:h-full min-h-40 flex flex-col",
+            id !== 6 && "px-5 p-5 lg:p-10"
           )}
         >
-          {/* change the order of the title and des, font-extralight, remove text-xs text-neutral-600 dark:text-neutral-300 , change the text-color */}
           <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-white z-10">
             {description}
           </div>
-          {/* add text-3xl max-w-96 , remove text-neutral-600 dark:text-neutral-300*/}
-          {/* remove mb-2 mt-2 */}
-          <div
-            className={`font-sans text-lg lg:text-3xl max-w-96 font-bold z-10 text-white`}
-          >
+          <div className="font-sans text-lg lg:text-3xl max-w-96 font-bold z-10 text-white">
             {title}
           </div>
         </div>
       </div>
 
+      {/* Icon (if any) */}
       {icon}
-      <div className="mt-2 mb-2 font-sans font-bold text-neutral-600 dark:text-neutral-200">
+
+      {/* Duplicate content (can be removed if redundant) */}
+      <div className="mt-2 mb-2 font-sans font-bold text-neutral-200">
         {title}
       </div>
-      <div className="font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300">
+      <div className="font-sans text-xs font-normal text-neutral-300">
         {description}
       </div>
     </div>
