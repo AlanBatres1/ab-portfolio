@@ -1,3 +1,4 @@
+import { socialMedia } from "../../../data";
 import { cn } from "../../../lib/utils/cn";
 import { BackgroundGradientAnimation } from "./background-gradient-animation";
 
@@ -49,7 +50,7 @@ export const BentoGridItem = ({
         "[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset]",
         "hover:[box-shadow:0_-40px_120px_-20px_#ffffff2f_inset]",
         "transition duration-300",
-        "bg-black",
+        "bg-[#f2f2f20c]",
         // Ensure content stays on top with relative z-10
         "relative z-10",
         id !== 6 && "p-4",
@@ -62,7 +63,16 @@ export const BentoGridItem = ({
       {/* Background Animation for ID 6 */}
       {id === 6 && (
         <div className="absolute inset-0 z-0">
-          <BackgroundGradientAnimation />
+          <div className="flex items-center justify-center md:gap-3 gap-6">
+            {socialMedia.map((profile) => (
+              <div
+                key={profile.id}
+                className="w-12 h-12 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300"
+              >
+                <img src={profile.img} alt="icons" width={24} height={24} />
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -111,14 +121,6 @@ export const BentoGridItem = ({
 
       {/* Icon (if any) */}
       {icon}
-
-      {/* Duplicate content (can be removed if redundant) */}
-      <div className="mt-2 mb-2 font-sans font-bold text-neutral-200">
-        {title}
-      </div>
-      <div className="font-sans text-xs font-normal text-neutral-300">
-        {description}
-      </div>
     </div>
   );
 };
