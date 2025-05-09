@@ -40,7 +40,7 @@ const Hero = () => {
   Hello, I&apos;m <span className="text-[#4bbafa]">Alan Batres</span>, a Full Stack Developer based in California.
 </p>
 
-      <a href="#about">
+      <a href="#projects">
         <MagicButton
           title="Show my Work"
           icon={<FaLocationArrow />}

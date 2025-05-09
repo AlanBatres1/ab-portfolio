@@ -1,6 +1,9 @@
-import { socialMedia } from "../../../data";
+import { socialMedia } from "../../data";
 import { cn } from "../../../lib/utils/cn";
 import { BackgroundGradientAnimation } from "./background-gradient-animation";
+import { GlobeDemo } from '@/components/ui/GridGlobe'
+import MagicButton from "./MagicButton";
+import { FaLocationArrow } from "react-icons/fa";
 
 export const BentoGrid = ({
   className,
@@ -54,6 +57,7 @@ export const BentoGridItem = ({
         // Ensure content stays on top with relative z-10
         "relative z-10",
         id !== 6 && "p-4",
+        id === 2 || 1 && " p-0 lg:p-0",
         className,
       )}
       style={{
@@ -62,17 +66,8 @@ export const BentoGridItem = ({
     >
       {/* Background Animation for ID 6 */}
       {id === 6 && (
-        <div className="absolute inset-0 z-0">
-          <div className="flex items-center justify-center md:gap-3 gap-6">
-            {socialMedia.map((profile) => (
-              <div
-                key={profile.id}
-                className="w-12 h-12 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300"
-              >
-                <img src={profile.img} alt="icons" width={24} height={24} />
-              </div>
-            ))}
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center mt-6 z-10">
+          
         </div>
       )}
 
@@ -107,20 +102,32 @@ export const BentoGridItem = ({
           className={cn(
             titleClassName,
             "group-hover/bento:translate-x-2 transition duration-200 relative md:h-full min-h-40 flex flex-col",
-            id !== 6 && "px-5 p-5 lg:p-10"
+            id !== 6 || 2 && "px-5 p-5 lg:p-10"
           )}
         >
           <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-white z-10">
             {description}
           </div>
-          <div className="font-sans text-lg lg:text-3xl max-w-96 font-bold z-10 text-white">
+          <div className="font-sans text-lg lg:text-3xl max-w-96 p-5 font-bold z-10 text-white mb-4">
             {title}
           </div>
+
+          {/* Add a margin-top to the button section */}
+          {id === 6 && (
+            <div className="absolute inset-0 flex items-center justify-center mt-30 lg:mt-35  z-10">
+              <a className="text-white" href="mailto:@alanbatres328@gmail.com">
+                <MagicButton
+                  title="Let's get in touch"
+                  icon={<FaLocationArrow />}
+                  position="right"
+                />
+              </a>
+            </div>
+          )}
+
+          {id === 2 && <GlobeDemo />}
         </div>
       </div>
-
-      {/* Icon (if any) */}
-      {icon}
     </div>
   );
 };
