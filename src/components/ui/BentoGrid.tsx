@@ -1,6 +1,4 @@
-import { socialMedia } from "../../data";
 import { cn } from "../../../lib/utils/cn";
-import { BackgroundGradientAnimation } from "./background-gradient-animation";
 import { GlobeDemo } from '@/components/ui/GridGlobe'
 import MagicButton from "./MagicButton";
 import { FaLocationArrow } from "react-icons/fa";
@@ -28,7 +26,6 @@ export const BentoGridItem = ({
   className,
   title,
   description,
-  icon,
   id,
   img,
   imgClassName,
@@ -102,8 +99,9 @@ export const BentoGridItem = ({
           className={cn(
             titleClassName,
             "group-hover/bento:translate-x-2 transition duration-200 relative md:h-full min-h-40 flex flex-col",
-            id !== 6 || 2 && "px-5 p-5 lg:p-10"
+            id !== 6 ? "px-5 p-5 lg:p-10" : "" 
           )}
+          
         >
           <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-white z-10">
             {description}
