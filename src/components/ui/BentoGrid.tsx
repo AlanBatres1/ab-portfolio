@@ -1,5 +1,4 @@
 import { cn } from "../../../lib/utils/cn";
-import { GlobeDemo } from '@/components/ui/GridGlobe'
 import MagicButton from "./MagicButton";
 import { FaLocationArrow } from "react-icons/fa";
 
@@ -123,7 +122,6 @@ export const BentoGridItem = ({
             </div>
           )}
 
-          {id === 2 && <GlobeDemo />}
         </div>
       </div>
     </div>
