@@ -3,6 +3,8 @@
 import { FaLocationArrow } from "react-icons/fa6";
 import { projects } from "../data";
 import { PinContainer } from "./ui/3d-pin";
+import Image from "next/image";
+
 const RecentProjects = () => {
     return (
         <div className="py-20" id="projects">
@@ -21,8 +23,7 @@ const RecentProjects = () => {
                             <div className="relative flex items-center justify-center sm:w-[570px] w-[80vw] overflow-hidden sm:h-[40vh] h-[30vh] mb-10">
                                 
                                 {img && (
-                                    <img src={img} alt="cover" className=" "
-                                    />
+                                    <Image src={img} alt="cover" className=" " width={600} height={300} />
                                 )}
                             </div>
 
@@ -47,10 +48,12 @@ const RecentProjects = () => {
                                                 className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
                                                 style={{ transform: offset }}
                                             >
-                                                <img
+                                                <Image
                                                     src={icon}
                                                     alt={`icon-${index}`}
                                                     className="p-2"
+                                                    width={32}
+                                                    height={32}
                                                 />
                                             </div>
                                         );

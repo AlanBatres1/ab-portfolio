@@ -1,6 +1,7 @@
 import { cn } from "../../../lib/utils/cn";
 import MagicButton from "./MagicButton";
 import { FaLocationArrow } from "react-icons/fa";
+import Image from "next/image";
 
 export const BentoGrid = ({
   className,
@@ -74,10 +75,12 @@ export const BentoGridItem = ({
         {/* Background Image */}
         {img && (
           <div className="w-full h-full absolute z-0">
-            <img
+            <Image
               src={img}
               alt={img}
               className={cn(imgClassName, "object-cover object-center")}
+              fill
+              style={{objectFit: 'cover'}}
             />
           </div>
         )}
@@ -85,10 +88,12 @@ export const BentoGridItem = ({
         {/* Spare Image */}
         {spareImg && (
           <div className={`absolute right-0 -bottom-5 ${id === 5 ? "w-full opacity-80" : ""}`}>
-            <img
+            <Image
               src={spareImg}
               alt={spareImg}
               className="object-cover object-center w-full h-full"
+              fill
+              style={{objectFit: 'cover'}}
             />
           </div>
         )}
